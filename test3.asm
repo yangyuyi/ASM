@@ -1,0 +1,26 @@
+DATAS  SEGMENT
+    CHAR DB ?
+DATAS  ENDS
+
+STACKS  SEGMENT
+      DB  128 DUP (?)
+STACKS  ENDS
+
+CODES  SEGMENT
+     ASSUME    CS:CODES,DS:DATAS,SS:STACKS
+START:
+    MOV AX,DATAS
+    MOV DS,AX
+
+    MOV AH,1    ;进行输入
+    INT 21H
+    MOV CHAR,AL
+
+    MOV DL,CHAR
+    mov AH,2    ;进行输出
+    INT 21H
+
+    MOV AH,4CH
+    INT 21H
+CODES  ENDS
+    END  START
